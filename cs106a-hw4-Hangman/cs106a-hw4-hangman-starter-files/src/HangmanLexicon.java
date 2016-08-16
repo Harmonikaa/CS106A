@@ -12,17 +12,36 @@
 import acm.util.*;
 import java.io.*;
 
-
 public class HangmanLexicon {
 	
+
+	private HangmanWordbank wordbank;
+	
+	public HangmanLexicon() {
 		
+		wordbank = new HangmanWordbank();
+		try{
+			BufferedReader br = new BufferedReader(new FileReader("res/ShorterLexicon.txt"));
+			while(true){
+				String line = br.readLine();
+				if(line == null)
+					break;
+				wordbank.addWordToWordbank(line);
+			}
+			br.close();
+			
+		} catch (IOException e) {
+			System.out.println("An error occurred " + e);
+		}
+	}
 /** 
  * Returns the number of words in the lexicon.
  * TODO: update this in part 3 of the assignment to use the wordbank
  * and it's associated methods.
  */
 	public int getWordCount() {
-		return 10;
+		//return 10;
+		return wordbank.getWordbankSize();
 	}
 
 /** 
@@ -31,7 +50,7 @@ public class HangmanLexicon {
  * wordbank and it's associated methods
  */
 	public String getWord(int index) {
-		switch (index) {
+		/*switch (index) {
 			case 0: return "BUOY";
 			case 1: return "COMPUTER";
 			case 2: return "CONNOISSEUR";
@@ -43,6 +62,7 @@ public class HangmanLexicon {
 			case 8: return "SLITHER";
 			case 9: return "ZIRCON";
 			default: throw new ErrorException("getWord: Illegal index");
-		}
+		}*/
+		return wordbank.getWordFromWordbank(index);
 	}
 }
